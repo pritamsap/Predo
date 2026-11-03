@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Predo: How a Todo Travels Through the Code",
+    "output": ".archify/sequence-predo-flow-20261103-173332/predo-flow.html",
+    "locale": "en",
+    "quality_profile": "showcase"
+  },
+  "participants": [
+    { "id": "user", "type": "external", "label": "You", "sublabel": "in the browser", "icon": "person" },
+    { "id": "react", "type": "frontend", "label": "React App", "sublabel": "frontend/src/App.jsx" },
+    { "id": "express", "type": "backend", "label": "Express API", "sublabel": "backend/server.js" },
+    { "id": "file", "type": "database", "label": "todos.json", "sublabel": "the \"database\" file" }
+  ],
+  "segments": [
+    { "from": 150, "to": 392, "label": "1. Page load" },
+    { "from": 402, "to": 632, "label": "2. Add a todo" },
+    { "from": 642, "to": 822, "label": "3. Toggle or delete" }
+  ],
+  "messages": [
+    { "id": "open-page", "from": "user", "to": "react", "y": 170, "label": "open the page", "variant": "default", "note": "Express serves the built React files from frontend/dist" },
+    { "id": "get-todos", "from": "react", "to": "express", "y": 230, "label": "GET /api/todos", "variant": "emphasis", "note": "useEffect(..., []) runs once when App mounts" },
+    { "id": "read-file", "from": "express", "to": "file", "y": 285, "label": "readTodos()", "variant": "default" },
+    { "id": "file-list", "from": "file", "to": "express", "y": 315, "label": "array of todos", "variant": "return" },
+    { "id": "list-json", "from": "express", "to": "react", "y": 345, "label": "200 JSON list", "variant": "return" },
+    { "id": "render-list", "from": "react", "to": "user", "y": 375, "label": "render list", "variant": "return" },
+
+    { "id": "submit", "from": "user", "to": "react", "y": 422, "label": "type + Enter", "variant": "default", "note": "form onSubmit calls addTodo()" },
+    { "id": "post-todo", "from": "react", "to": "express", "y": 477, "label": "POST /api/todos {text}", "variant": "emphasis", "note": "empty text is rejected with 400" },
+    { "id": "save-new", "from": "express", "to": "file", "y": 532, "label": "saveTodos(list + new)", "variant": "default" },
+    { "id": "created", "from": "express", "to": "react", "y": 562, "label": "201 new todo", "variant": "return", "note": "id comes from Date.now()" },
+    { "id": "render-added", "from": "react", "to": "user", "y": 615, "label": "show new item", "variant": "return", "note": "setTodos((prev) => [...prev, todo])" },
+
+    { "id": "click", "from": "user", "to": "react", "y": 662, "label": "click checkbox or ✕", "variant": "default" },
+    { "id": "patch-delete", "from": "react", "to": "express", "y": 692, "label": "PATCH or DELETE /api/todos/:id", "variant": "emphasis", "note": "PATCH flips done; DELETE filters the item out" },
+    { "id": "save-change", "from": "express", "to": "file", "y": 747, "label": "saveTodos(updated)", "variant": "default" },
+    { "id": "changed", "from": "express", "to": "react", "y": 777, "label": "200 todo / 204 empty", "variant": "return" },
+    { "id": "render-changed", "from": "react", "to": "user", "y": 807, "label": "re-render", "variant": "return" }
+  ],
+  "activations": [
+    { "participant": "react", "from": 165, "to": 813, "type": "frontend" },
+    { "participant": "express", "from": 225, "to": 351, "type": "backend" },
+    { "participant": "file", "from": 280, "to": 321, "type": "database" },
+    { "participant": "express", "from": 472, "to": 568, "type": "backend" },
+    { "participant": "file", "from": 527, "to": 540, "type": "database" },
+    { "participant": "express", "from": 687, "to": 783, "type": "backend" },
+    { "participant": "file", "from": 742, "to": 755, "type": "database" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Dev vs production",
+      "items": [
+        "Dev: Vite serves React on :5173 and proxies /api to Express on :3001",
+        "Production: npm run build makes frontend/dist, and Express serves it plus /api on one port",
+        "Same fetch('/api/...') code works in both, so no CORS setup"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "The one pattern to learn",
+      "items": [
+        "Every action is: React calls fetch, Express changes todos.json, React updates state",
+        "State update re-renders the list; the server is the source of truth",
+        "Use setTodos(prev => ...) so fast clicks never overwrite each other"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Where to read the code",
+      "items": [
+        "frontend/src/App.jsx: the whole UI and all four fetch calls",
+        "backend/server.js: four routes plus readTodos and saveTodos",
+        "backend/todos.json: created on the first add"
+      ]
+    }
+  ]
+}

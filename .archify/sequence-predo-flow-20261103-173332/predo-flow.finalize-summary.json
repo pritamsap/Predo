@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "sequence",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/pritam/Desktop/Learning/Predo/.archify/sequence-predo-flow-20261103-173332/candidate.json",
+    "sha256": "d65f36383a83958f78bbfbe09686c328827ffca1d9cb8c3a28e24083ada03edc",
+    "bytes": 4767
+  },
+  "artifact": {
+    "path": "/Users/pritam/Desktop/Learning/Predo/.archify/sequence-predo-flow-20261103-173332/predo-flow.html",
+    "sha256": "73a6470cc8d2d4fcaf5189c7d5c4cf3263ff425df779f58ae72eabc0252437e7",
+    "bytes": 842101
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/pritam/Desktop/Learning/Predo/.archify/sequence-predo-flow-20261103-173332/predo-flow.finalize.json",
+    "summaryReceipt": "/Users/pritam/Desktop/Learning/Predo/.archify/sequence-predo-flow-20261103-173332/predo-flow.finalize-summary.json",
+    "browserCheckReceipt": "/Users/pritam/Desktop/Learning/Predo/.archify/sequence-predo-flow-20261103-173332/predo-flow.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-11-03T22:33:53.048Z",
+    "source": "network",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 4002,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

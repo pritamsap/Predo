@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "3d047c86-b5e1-463e-828c-b2d40327c5b3",
+  "status": "current",
+  "command": "deliver",
+  "type": "sequence",
+  "input": "/Users/pritam/Desktop/Learning/Predo/.archify/sequence-predo-flow-20261103-173332/candidate.json",
+  "output": "/Users/pritam/Desktop/Learning/Predo/.archify/sequence-predo-flow-20261103-173332/predo-flow.html",
+  "specification": {
+    "sha256": "d65f36383a83958f78bbfbe09686c328827ffca1d9cb8c3a28e24083ada03edc",
+    "bytes": 4767
+  },
+  "artifact": {
+    "sha256": "73a6470cc8d2d4fcaf5189c7d5c4cf3263ff425df779f58ae72eabc0252437e7",
+    "bytes": 842101
+  }
+}
